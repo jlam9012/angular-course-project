@@ -20,7 +20,10 @@ export class RecipeDetailComponent implements OnInit {
       (params: Params) => {
         this.recipe = this.recipeService.getRecipe(+params['id']);
       }
-    )
+    );
+    this.recipeService.recipesChanged.subscribe((recipes: Recipe[]) => {
+      this.recipe = recipes.find(recipe => recipe.id === this.recipe.id);
+    });
   }
       
   onAddToShoppingList() {
